@@ -1,4 +1,5 @@
-// from https://github.com/samuelfullerthomas/argo
+// This file is copyright Samuel Thomas from https://github.com/samuelfullerthomas/argo
+// This file is excluded from the repository LICENSE.txt file.
 
 const METERS_IN_A_LATITUDE_DEGREE = 111000;
 
