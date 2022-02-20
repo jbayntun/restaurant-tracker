@@ -3,21 +3,41 @@ const sqlite3 = require('sqlite3');
 var express = require('express');
 var router = express.Router();
 
-const db = new sqlite3.Database('restaurants.db');
+const db = new sqlite3.Database('restaurants.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE);
+
+db.run(`
+CREATE TABLE IF NOT EXISTS restaurants(
+  google_id TEXT PRIMARY KEY NOT NULL,
+  name TEXT NOT NULL,
+  address TEXT NOT NULL,
+  google_types TEXT NOT NULL,
+  google_rating DOUBLE,
+  google_ratings_count INT,
+  google_price_level INT,
+  google_status TEXT,
+  latitude TEXT,
+  longitude TEXT,
+  has_visited INT,
+  want_to_visit INT
+);`);
 
 /* GET home page. */
 router.get('/', function(req, res) {
 
   visit_options = ["high", "yes", "maybe", "no"];
 
-  db.all(`SELECT r.google_id, name, google_rating, google_ratings_count, google_url, website, distance_from_jeff, walk_time, phone, has_visited, want_to_visit  
-        FROM restaurants r LEFT JOIN restaurants_detail d on r.google_id=d.google_id
+  db.all(`SELECT r.google_id, name, google_rating, google_ratings_count, has_visited, want_to_visit  
+        FROM restaurants r
         WHERE r.want_to_visit <> 'no'
           AND r.google_status = 'OPERATIONAL'
-        ORDER BY google_rating DESC, distance_from_jeff
+        ORDER BY google_rating DESC
         LIMIT 200`, 
   (err, rows) => {
 
+    if(err) {
+      console.error(err.message);
+    }
+    console.log(rows);
     for (r of rows) {
       var temp = {};
       r.name.website = r.website;

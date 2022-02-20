@@ -14,14 +14,8 @@ block content
           return params.value.name;
         }
       },
-      {field: "google_url", width: 150, cellRenderer: params => {
-        if(!params.value) {return "--";}
-        return '<a href="' + params.value + '" target="_blank" rel="noopener noreferrer">Open Map</a>';
-      }},
       {field: "google_rating", filter: 'agNumberColumnFilter', width: 100, sortable: true},
       {field: "google_ratings_count", filter: 'agNumberColumnFilter', width: 100, sortable: true},
-      {field: "distance_from_jeff", width: 150},
-      {field: "walk_time", width: 150},
       {field: "has_visited", width: 200,
         cellRenderer: params => {
           var retVal = '';
