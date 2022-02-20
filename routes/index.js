@@ -21,6 +21,16 @@ CREATE TABLE IF NOT EXISTS restaurants(
   want_to_visit INT
 );`);
 
+db.run(`
+CREATE TABLE IF NOT EXISTS visits(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  restaurant_id TEXT NOT NULL,
+  date TEXT NOT NULL,
+  rating TEXT NOT NULL,
+  dishes TEXT,
+  COMMENT TEXT
+);`);
+
 /* GET home page. */
 router.get('/', function(req, res) {
 

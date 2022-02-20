@@ -40,4 +40,4 @@ Run the app:
 $ npm start
 ```
 
-You can now navigate to https://localhost:3000 to really get started :)
+You can now navigate to http://localhost:3000 to really get started :)
