@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    div(id='myGrid', style='height: 500px; width:1600px;', class='ag-theme-alpine')
+    script.
+        const columnDefs= [
+            {field: "date"},
+            {field: "rating"},
+            {field: "dishes"},
+            {field: "comment"}
+        ] ;
+
+        const rowData = !{JSON.stringify(visits)};
+        const gridOptions = {
+            columnDefs: columnDefs,
+            rowData: rowData
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridDiv = document.querySelector('#myGrid');
+            new agGrid.Grid(gridDiv, gridOptions);
+        });

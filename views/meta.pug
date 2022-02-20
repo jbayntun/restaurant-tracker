@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 Meta
+  form(action='/meta/', method='POST')
+    span Lat-Long 1
+    input(type='text' size='60' name='lat1')
+    input(type='text' size='60' name='long1')
+    | #[br]
+    span Lat-Long 2
+    input(type='text' size='60' name='lat2')
+    input(type='text' size='60' name='long2')
+    | #[br]
+    label(for='radius') Radius (m)
+    input(type='number' name='radius' value='2000')
+    | #[br]
+    button(type="submit") Add

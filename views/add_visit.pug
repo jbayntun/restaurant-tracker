@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Add Visit
+  - var today = new Date().toLocaleDateString()
+  form(action='/visit/add/' + google_id, method='POST')
+    label(for='rating') Rating:&emsp;&emsp;
+    select(name='rating') 
+        option(value='awesome') awesome
+        option(value='good' selected) good
+        option(value='meh') meh
+        option(value='bad') bad
+    | #[br]
+    label(for='date') Date:&emsp;&emsp;&emsp;
+    input(type='date' name='date' value='' + today)
+    | #[br]
+    label(for='dishes') Dishes:&emsp;&emsp;
+    input(type='text' size='60' name='dishes' value='["first", "second"]')
+    | #[br]
+    label(for='comment') Comment:&emsp;
+    textarea(name='comment' cols='61')
+    | #[br]
+    button(type="submit") Add

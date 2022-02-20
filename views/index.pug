@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  h1=title
+  div(id='myGrid', style='height: 500px; width:1600px;', class='ag-theme-alpine')
+  script.
+    const visitOptions = ["high", "yes", "maybe", "no"];
+    const columnDefs= [
+      {field: "name", width: 300,
+        cellRenderer: params => {
+          if(params.value.website) {
+            return output = '<a href="' + params.value.website + '" target="_blank" rel="noopener noreferrer">' + params.value.name + '</a>';
+          }
+          return params.value.name;
+        }
+      },
+      {field: "google_url", width: 150, cellRenderer: params => {
+        if(!params.value) {return "--";}
+        return '<a href="' + params.value + '" target="_blank" rel="noopener noreferrer">Open Map</a>';
+      }},
+      {field: "google_rating", filter: 'agNumberColumnFilter', width: 100, sortable: true},
+      {field: "google_ratings_count", filter: 'agNumberColumnFilter', width: 100, sortable: true},
+      {field: "distance_from_jeff", width: 150},
+      {field: "walk_time", width: 150},
+      {field: "has_visited", width: 200,
+        cellRenderer: params => {
+          var retVal = '';
+          if (params.value > 0) {
+            retVal += '<a href="/visit/' + params.data.google_id + '">' + params.value + '</a>';
+          }
+          else {
+            retVal += params.value;
+          }
+          return retVal + '  |&nbsp;&nbsp;&nbsp;<a href=/visit/add/' + params.data.google_id + '>Add Visit</a>';
+        }},
+      {field: "want_to_visit",
+        cellRenderer: params => {
+          var output = '<form action="/" method="POST"><select name="want_to_visit">';
+          for (let opt of visitOptions) {
+            if (params.value.want_to_visit == opt) {
+              output += '<option value="' + opt + '" selected >' + opt + '</option>';
+            }
+            else {
+              output += '<option value="' + opt + '">' + opt + '</option>';
+            }
+          }
+          output += '</select><input type="submit" value="Update"><input type="hidden" name="id" value="' + params.value.google_id + '"></form>'
+          return output;
+        },
+        sortable: true,
+        comparator: (valueA, valueB, nodeA, nodeB, isInverted) => {
+          if (valueA.want_to_visit == valueB.want_to_visit) return 0;
+          if (valueA.want_to_visit == 'high') return 1;
+          if (valueB.want_to_visit == 'high') return -1;
+          if (valueA.want_to_visit == 'yes') return 1;
+          if (valueB.want_to_visit == 'yes') return -1;
+          if (valueA.want_to_visit == 'maybe') return 1;
+          if (valueB.want_to_visit == 'maybe') return -1;
+          return 0; // shouldn't hit this.
+        }
+      }
+    ];
+    const rowData = !{JSON.stringify(items)};
+    const gridOptions = {
+      columnDefs: columnDefs,
+      rowData: rowData
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const gridDiv = document.querySelector('#myGrid');
+      new agGrid.Grid(gridDiv, gridOptions);
+    });
