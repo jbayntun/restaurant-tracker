@@ -27,7 +27,6 @@ router.post('/add/:restaurant_id', function(req, res, next) {
     req.params.restaurant_id);
 
     return res.redirect('/');
-    //res.render('add_visit', {google_id: req.params.restaurant_id});
 });
 
 // shows visits at a given restaurant

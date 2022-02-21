@@ -72,7 +72,7 @@ router.post('/', function(req, res) {
 
   if(req.body.want_to_visit && req.body.id) {
     db.run('UPDATE restaurants SET want_to_visit = ? where google_id = ?', req.body.want_to_visit, req.body.id);
-    return res.sendStatus(200);
+    return res.redirect("/");
   }
 
   return res.send('Item not found');

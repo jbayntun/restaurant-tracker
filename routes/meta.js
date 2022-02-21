@@ -1,4 +1,5 @@
-// much of this file is from https://github.com/samuelfullerthomas/argo
+// Much of this file is from https://github.com/samuelfullerthomas/argo
+// Those components are excluded from the repository LICENSE.txt file.
 
 var express = require('express');
 var router = express.Router();
@@ -60,8 +61,7 @@ router.post('/', async (req, res, next) => {
   );
 
   writeToDB(placesWithDetails);
-
-  res.send("things might have happened!");
+  res.redirect("/");
 });
 
 function writeToDB(placesWithDetails) {
