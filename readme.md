@@ -8,6 +8,9 @@ This app helps organize all your restaurant activities!  You can:
 * Mark restaurants that you want or don't want to visit
 * Keep track of past visits
 
+Here's a screenshot:
+![Screenshot of Web App](public/images/Screenshot.png)
+
 ## Why not just use Google Directly?
 
 This app makes repeated calls to the Google API to get an exhaustive list of all restaurants.  For other ways of searching, it's hard to know if you have ALL the restaurants.
