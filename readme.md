@@ -8,6 +8,8 @@ This app helps organize all your restaurant activities!  You can:
 * Mark restaurants that you want or don't want to visit
 * Keep track of past visits
 
+__I've noticed some cases where searching a grid will make MANY MORE Google API calls than expected, which can/will cost you money.  Be careful if testing this!!__
+
 Here's a screenshot:
 ![Screenshot of Web App](public/images/Screenshot.png)
 
